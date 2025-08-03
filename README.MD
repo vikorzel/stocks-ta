@@ -1,0 +1,1 @@
+SSR Solution for basic technical analyzis of stocks

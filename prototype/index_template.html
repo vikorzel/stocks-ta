@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Stock Chart</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Itim&family=Sofia+Sans+Semi+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div class="header">
+        <div class="title">
+            <img src="./stocks.png" class="logo">
+            <h2>Stock Chart</h2>
+        </div>
+        <div class="stockname">
+            Snowflake Inc. (SNOW)
+        </div>
+    </div>
+
+    <div class="input body-box">
+        <form class="input-form">
+            <label class="input-label">
+                <div class="input-title">Stock</div>
+                <input class="input-text" type="text" id="stockInput" name="stockInput" placeholder="Enter stock symbol (e.g., AAPL, TSLA)">
+            </label>
+            <label class="input-label">
+                <div class="input-title">Type</div>
+                <select class="input" id="typeInput" name="typeInput">
+                    <option value="" disabled selected>Select transaction type...</option>
+                    <option value="buy">Buy</option>
+                    <option value="sell">Sell</option>
+                    <option value="stop-loss">Stop-Loss</option>
+                </select>
+            </label>
+            <p>
+            <button type="submit">Submit</button>
+            </p>
+        </form>
+    </div>
+
+</body>
+
+</html>

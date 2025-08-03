@@ -1,0 +1,217 @@
+body {
+   background-color: #A6A6A6; 
+}
+
+.header {
+    height: 85px;
+    background-color: #E6E6E6;
+    display: flex;
+    padding-top: 20px;
+    padding-left: 22px;
+    padding-right: 22px;
+    border-radius: 9px;
+    align-items: center;
+    justify-content: space-between; /* Add this line */
+}
+
+.title {
+    margin: 0px 10px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 24px;
+}
+
+.title h2 {
+    text-transform: uppercase;
+    font-size: 32px;
+    letter-spacing: 0.13em;
+    font-family: "Itim", cursive;
+    font-weight: 400;
+    font-style: normal;
+    padding-left: 10px;
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    margin-top: 10px;
+    padding-bottom: 10px;
+}
+
+.stockname {
+    font-size: 22px;
+    padding-bottom: 24px;
+    font-family: "Inika", serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.body-box {
+    background-color: #E6E6E6;
+    border-radius: 9px;
+    margin-top: 20px;
+    padding-top: 20px;
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+}
+
+.input-form {
+    padding: 0 20px 20px 20px;
+}
+
+.input-label {
+    margin-bottom: 15px;
+    display: block;
+}
+
+.input-label .input-title {
+    font-weight: 700;
+    font-size: 16px;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    color: #333;
+    margin: 0px;
+    padding-bottom: 2px;
+    line-height: 1;
+    display: block;
+}
+
+.input-text {
+    background-color: #D3D3D3;
+    border: 1px solid #B0B0B0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    width: 200px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    margin-top: 0px;
+}
+
+.input-text:focus {
+    border-color: #888;
+    background-color: #E0E0E0;
+}
+
+.input-text::placeholder {
+    color: #888;
+    font-style: italic;
+    opacity: 0.8;
+}
+
+/* Style for select dropdown */
+select.input {
+    background-color: #D3D3D3;
+    border: 1px solid #B0B0B0;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-size: 16px;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    width: 230px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    cursor: pointer;
+    margin-top: 0px;
+}
+
+select.input:focus {
+    border-color: #888;
+    background-color: #E0E0E0;
+}
+
+select.input option:disabled {
+    color: #888;
+    font-style: italic;
+}
+
+/* Style for submit button */
+button[type="submit"] {
+    background-color: #D3D3D3;
+    border: 1px solid #B0B0B0;
+    border-radius: 8px;
+    padding: 12px 25px;
+    font-size: 16px;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-top: 15px;
+}
+
+button[type="submit"]:hover {
+    background-color: #C0C0C0;
+    border-color: #999;
+}
+
+button[type="submit"]:active {
+    background-color: #B8B8B8;
+}
+
+.chart-container {
+    padding-top: 15px;
+    padding-left: 13px;
+    padding-right: 13px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.chart {
+    width: 70%;
+    background-color: azure;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
+    color: brown;
+}
+
+.chart-description {
+    width: 29%;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 18px;
+    padding-top: 5px;
+    text-align: justify;
+}
+
+.conclusions {
+    padding: 15px 13px;
+    background-color: white;
+    border-radius: 9px;
+}
+
+.llm {
+    
+    width: 100%;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 450;
+    font-style: normal;
+    font-size: 18px;
+    text-align: justify;
+    padding-right: 20px;
+}
+
+.llm p {
+    text-align: right;
+    padding-right: 30px;
+    font-family: "Sofia Sans Semi Condensed", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 22px;
+}
+
+.conclusions {
+    padding-top: 15px;
+    padding-left: 13px;
+    padding-right: 13px;
+    display: flex;
+    justify-content: space-between;
+}
