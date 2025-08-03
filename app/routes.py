@@ -2,6 +2,8 @@ from flask import render_template, Flask, request
 from . import config
 from . import tickers
 from . import ticker_meta
+from . import llm
+import json
 
 
 def init_routes(app: Flask, config_data: config.AppConfig):
@@ -18,8 +20,7 @@ def init_routes(app: Flask, config_data: config.AppConfig):
         quote = request.args.get("stock")
         chart_type = request.args.get("type")
         numbers = tickers.build(quote, chart_type)
-        llm = "NOT IMPLEMENTED YET"
-        
+        llm_response = llm.get_recomendation(chart_type, numbers, config_data)
         ticker_meta_data = ticker_meta.get_ticker_meta(quote)
         ticker_name = f"{ticker_meta_data['longName']} ({ticker_meta_data['ticker']})"
         render = "".join(
@@ -34,9 +35,10 @@ def init_routes(app: Flask, config_data: config.AppConfig):
         )
         
         
+        
         return render_template("chart.html", 
                                charts=render, 
-                               llm=llm, 
+                               llm=llm_response, 
                                ticker_name=ticker_name,
                                toBuy=ticker_meta_data['toBuy'],
                                toSell=ticker_meta_data['toSell'],

@@ -7,6 +7,8 @@ class AppConfig(typing.TypedDict):
     static_folder: str
     template_folder: str
     version: str
+    llmModel: str
+    llmMaxTokens: int
     
 def get_app_config() -> AppConfig:
     script_path = pathlib.Path(__file__).resolve()
@@ -22,5 +24,7 @@ def get_app_config() -> AppConfig:
     return AppConfig(
         static_folder=config_data['path']['static'],
         template_folder=config_data['path']['template'],
-        version=version
+        version=version,
+        llmModel=config_data['llm']['model'],
+        llmMaxTokens=config_data['llm']['max_tokens']
     )

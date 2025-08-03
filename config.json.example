@@ -2,5 +2,9 @@
     "path": {
         "static": <path/to/static/folder>,
         "template": <path/to/template/folder>
+    },
+    "llm": {
+        "max_tokens": 15000,
+        "model": "gemini-2.5-flash-lite"
     }
 }
