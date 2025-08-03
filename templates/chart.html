@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inika:wght@400;700&family=Itim&family=Sofia+Sans+Semi+Condensed:ital,wght@0,1..1000;1,1..1000&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <div class="header">
@@ -16,7 +17,7 @@
             <h2>Stock Chart</h2>
         </div>
         <div class="stockname">
-            Snowflake Inc. (SNOW)
+            {{ ticker_name }}
         </div>
     </div>
 
@@ -24,13 +25,137 @@
         <div class="conclusions">
             <div class="llm">
                 <p> LLM </p>
-                "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?"
+                {{ llm }}
             </div>
-            <div class="recomendataions"><img src="./static/recommendations.png" alt=""></div>
+            <div class="recomendataions">
+                <!-- Pie Chart Container -->
+                <div class="chart-container" style="position: relative; height: 400px; width: 400px; margin: 20px auto;">
+                    <canvas id="recommendationsPieChart"></canvas>
+                </div>
+            </div>
         </div>
 
         {{ charts|safe }}
     </div>
+    
+    <script>
+        // Pie Chart for Stock Recommendations
+        function createRecommendationsPieChart(toBuy, toSell, toHold, toStrongBuy, toStrongSell) {
+            const ctx = document.getElementById('recommendationsPieChart').getContext('2d');
+            
+            // Prepare data arrays
+            const labels = [];
+            const values = [];
+            const colors = [];
+            
+            // Color mapping for each recommendation type
+            const colorMap = {
+                'Strong Buy': '#006400',    // Dark Green
+                'Buy': '#32CD32',          // Lime Green
+                'Hold': '#FFD700',         // Gold
+                'Sell': '#FF6347',         // Tomato
+                'Strong Sell': '#DC143C'   // Crimson
+            };
+            
+            // Add data points only if they have values > 0
+            if (toStrongBuy > 0) {
+                labels.push('Strong Buy');
+                values.push(toStrongBuy);
+                colors.push(colorMap['Strong Buy']);
+            }
+            if (toBuy > 0) {
+                labels.push('Buy');
+                values.push(toBuy);
+                colors.push(colorMap['Buy']);
+            }
+            if (toHold > 0) {
+                labels.push('Hold');
+                values.push(toHold);
+                colors.push(colorMap['Hold']);
+            }
+            if (toSell > 0) {
+                labels.push('Sell');
+                values.push(toSell);
+                colors.push(colorMap['Sell']);
+            }
+            if (toStrongSell > 0) {
+                labels.push('Strong Sell');
+                values.push(toStrongSell);
+                colors.push(colorMap['Strong Sell']);
+            }
+            
+            // Only create chart if we have data
+            if (labels.length === 0) {
+                document.getElementById('recommendationsPieChart').style.display = 'none';
+                return;
+            }
+            
+            const chart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        data: values,
+                        backgroundColor: colors,
+                        borderColor: '#ffffff',
+                        borderWidth: 2,
+                        hoverBorderWidth: 3
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Analyst Recommendations',
+                            font: {
+                                size: 16,
+                                weight: 'bold'
+                            },
+                            padding: 20
+                        },
+                        legend: {
+                            position: 'bottom',
+                            labels: {
+                                padding: 15,
+                                usePointStyle: true,
+                                font: {
+                                    size: 12
+                                }
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const label = context.label || '';
+                                    const value = context.parsed;
+                                    const total = context.dataset.data.reduce((a, b) => a + b, 0);
+                                    const percentage = ((value / total) * 100).toFixed(1);
+                                    return `${label}: ${value} (${percentage}%)`;
+                                }
+                            }
+                        }
+                    },
+                    animation: {
+                        animateScale: true,
+                        animateRotate: true
+                    }
+                }
+            });
+        }
+        
+        // Initialize the chart when the page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            createRecommendationsPieChart(
+                {{ toBuy }},
+                {{ toSell }},
+                {{ toHold }},
+                {{ toStrongBuy }},
+                {{ toStrongSell }}
+            );
+        });
+    </script>
     
 </body>
 </html>

@@ -178,6 +178,8 @@ button[type="submit"]:active {
     padding: 15px 13px;
     background-color: white;
     border-radius: 9px;
+    margin-left: 15px;
+    margin-right: 15px;
 }
 
 .llm {

@@ -1,7 +1,7 @@
 from flask import render_template, Flask, request
 from . import config
-from . import charts
 from . import tickers
+from . import ticker_meta
 
 
 def init_routes(app: Flask, config_data: config.AppConfig):
@@ -19,7 +19,9 @@ def init_routes(app: Flask, config_data: config.AppConfig):
         chart_type = request.args.get("type")
         numbers = tickers.build(quote, chart_type)
         llm = "NOT IMPLEMENTED YET"
-        analysis = "NOT IMPLEMENTED YET"
+        
+        ticker_meta_data = ticker_meta.get_ticker_meta(quote)
+        ticker_name = f"{ticker_meta_data['longName']} ({ticker_meta_data['ticker']})"
         render = "".join(
             [
                 render_template(
@@ -30,4 +32,15 @@ def init_routes(app: Flask, config_data: config.AppConfig):
                 for number in numbers.values()
             ]
         )
-        return render_template("chart.html", charts=render, llm=llm, analysis=analysis)
+        
+        
+        return render_template("chart.html", 
+                               charts=render, 
+                               llm=llm, 
+                               ticker_name=ticker_name,
+                               toBuy=ticker_meta_data['toBuy'],
+                               toSell=ticker_meta_data['toSell'],
+                               toHold=ticker_meta_data['toHold'],
+                               toStrongBuy=ticker_meta_data['toStrongBuy'],
+                               toStrongSell=ticker_meta_data['toStrongSell']
+                            )
