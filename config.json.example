@@ -1,0 +1,6 @@
+{
+    "path": {
+        "static": <path/to/static/folder>,
+        "template": <path/to/template/folder>
+    }
+}
